@@ -608,6 +608,7 @@ public class PetApi {
     /**
      * Build call for getPetById
      * @param petId ID of pet to return (required)
+     * @param paginationToken ID of pet to return (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -619,7 +620,7 @@ public class PetApi {
         <tr><td> 404 </td><td> Pet not found </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getPetByIdCall(Long petId, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call getPetByIdCall(Long petId, Long paginationToken, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -645,6 +646,10 @@ public class PetApi {
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
+        if (paginationToken != null) {
+            localVarHeaderParams.put("pagination_token", localVarApiClient.parameterToString(paginationToken));
+        }
+
         final String[] localVarAccepts = {
             "application/xml", "application/json"
         };
@@ -666,7 +671,7 @@ public class PetApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call getPetByIdValidateBeforeCall(Long petId, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call getPetByIdValidateBeforeCall(Long petId, Long paginationToken, final ApiCallback _callback) throws ApiException {
         
         // verify the required parameter 'petId' is set
         if (petId == null) {
@@ -674,7 +679,7 @@ public class PetApi {
         }
         
 
-        okhttp3.Call localVarCall = getPetByIdCall(petId, _callback);
+        okhttp3.Call localVarCall = getPetByIdCall(petId, paginationToken, _callback);
         return localVarCall;
 
     }
@@ -683,6 +688,7 @@ public class PetApi {
      * Find pet by ID
      * Returns a single pet
      * @param petId ID of pet to return (required)
+     * @param paginationToken ID of pet to return (optional)
      * @return Pet
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -693,8 +699,8 @@ public class PetApi {
         <tr><td> 404 </td><td> Pet not found </td><td>  -  </td></tr>
      </table>
      */
-    public Pet getPetById(Long petId) throws ApiException {
-        ApiResponse<Pet> localVarResp = getPetByIdWithHttpInfo(petId);
+    public Pet getPetById(Long petId, Long paginationToken) throws ApiException {
+        ApiResponse<Pet> localVarResp = getPetByIdWithHttpInfo(petId, paginationToken);
         return localVarResp.getData();
     }
 
@@ -702,6 +708,7 @@ public class PetApi {
      * Find pet by ID
      * Returns a single pet
      * @param petId ID of pet to return (required)
+     * @param paginationToken ID of pet to return (optional)
      * @return ApiResponse&lt;Pet&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -712,8 +719,8 @@ public class PetApi {
         <tr><td> 404 </td><td> Pet not found </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Pet> getPetByIdWithHttpInfo(Long petId) throws ApiException {
-        okhttp3.Call localVarCall = getPetByIdValidateBeforeCall(petId, null);
+    public ApiResponse<Pet> getPetByIdWithHttpInfo(Long petId, Long paginationToken) throws ApiException {
+        okhttp3.Call localVarCall = getPetByIdValidateBeforeCall(petId, paginationToken, null);
         Type localVarReturnType = new TypeToken<Pet>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -722,6 +729,7 @@ public class PetApi {
      * Find pet by ID (asynchronously)
      * Returns a single pet
      * @param petId ID of pet to return (required)
+     * @param paginationToken ID of pet to return (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -733,9 +741,9 @@ public class PetApi {
         <tr><td> 404 </td><td> Pet not found </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getPetByIdAsync(Long petId, final ApiCallback<Pet> _callback) throws ApiException {
+    public okhttp3.Call getPetByIdAsync(Long petId, Long paginationToken, final ApiCallback<Pet> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = getPetByIdValidateBeforeCall(petId, _callback);
+        okhttp3.Call localVarCall = getPetByIdValidateBeforeCall(petId, paginationToken, _callback);
         Type localVarReturnType = new TypeToken<Pet>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;

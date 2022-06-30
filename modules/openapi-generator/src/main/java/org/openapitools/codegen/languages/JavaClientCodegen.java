@@ -692,6 +692,17 @@ public class JavaClientCodegen extends AbstractJavaCodegen
     public OperationsMap postProcessOperationsWithModels(OperationsMap objs, List<ModelMap> allModels) {
         super.postProcessOperationsWithModels(objs, allModels);
 
+        // set x-pagination-token to true if the parameter name is `pagination_token`
+        OperationMap operationsMap = objs.getOperations();
+        List<CodegenOperation> operationsList = operationsMap.getOperation();
+        for (CodegenOperation op : operationsList) {
+            for (CodegenParameter param : op.allParams) {
+                if ("pagination_token".equals(param.baseName)) {
+                    param.vendorExtensions.put("x-pagination-token", true);
+                }
+            }
+        }
+
         if (useSingleRequestParameter && (JERSEY2.equals(getLibrary()) || JERSEY3.equals(getLibrary()) || OKHTTP_GSON.equals(getLibrary()))) {
             // loop through operations to set x-group-parameters extenion to true if useSingleRequestParameter option is enabled
             OperationMap operations = objs.getOperations();

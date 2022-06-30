@@ -228,6 +228,15 @@ paths:
           format: int64
           type: integer
         style: simple
+      - description: ID of pet to return
+        explode: false
+        in: header
+        name: pagination_token
+        required: false
+        schema:
+          format: int64
+          type: integer
+        style: simple
       responses:
         "200":
           content:

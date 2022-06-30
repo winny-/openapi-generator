@@ -290,7 +290,7 @@ public class Example {
 
 <a name="getPetById"></a>
 # **getPetById**
-> Pet getPetById(petId)
+> Pet getPetById(petId, paginationToken)
 
 Find pet by ID
 
@@ -319,8 +319,9 @@ public class Example {
 
     PetApi apiInstance = new PetApi(defaultClient);
     Long petId = 56L; // Long | ID of pet to return
+    Long paginationToken = 56L; // Long | ID of pet to return
     try {
-      Pet result = apiInstance.getPetById(petId);
+      Pet result = apiInstance.getPetById(petId, paginationToken);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling PetApi#getPetById");
@@ -338,6 +339,7 @@ public class Example {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **petId** | **Long**| ID of pet to return | |
+| **paginationToken** | **Long**| ID of pet to return | [optional] |
 
 ### Return type
 

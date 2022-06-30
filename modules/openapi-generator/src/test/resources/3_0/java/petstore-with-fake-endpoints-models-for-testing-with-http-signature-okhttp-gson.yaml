@@ -171,6 +171,12 @@ paths:
           schema:
             type: integer
             format: int64
+        - name: pagination_token
+          in: header
+          description: ID of pet to return
+          schema:
+            type: integer
+            format: int64
       responses:
         '200':
           description: successful operation
