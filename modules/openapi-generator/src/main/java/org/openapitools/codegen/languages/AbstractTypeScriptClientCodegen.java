@@ -32,6 +32,7 @@ import org.openapitools.codegen.meta.features.*;
 import org.openapitools.codegen.model.ModelMap;
 import org.openapitools.codegen.model.ModelsMap;
 import org.openapitools.codegen.utils.ModelUtils;
+import io.swagger.v3.oas.models.security.SecurityScheme;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -245,6 +246,16 @@ public abstract class AbstractTypeScriptClientCodegen extends DefaultCodegen imp
             return toModelImportMap(name).values().stream().collect(Collectors.joining("&"));
         }
         return super.toModelImport(name);
+    }
+
+    @Override
+    @SuppressWarnings("static-method")
+    public List<CodegenSecurity> fromSecurity(Map<String, SecurityScheme> securitySchemeMap) {
+        List<CodegenSecurity> out = super.fromSecurity(securitySchemeMap);
+        for (CodegenSecurity sec : out) {
+            sec.name = sanitizeName(sec.name);  // Handle names that have weird symbols in them.
+        }
+        return out;
     }
 
     /**
